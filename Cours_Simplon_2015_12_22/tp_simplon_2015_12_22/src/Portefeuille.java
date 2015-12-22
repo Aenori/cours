@@ -98,16 +98,34 @@ public class Portefeuille {
 	// Modifie le budget en tenant compte de la vente, et renvoit la plus value
 	public double vendre(int i) throws Exception
 	{
-		
+		/* TODO : modifier cette fonction de sorte qu'elle vende l'actionTitre d'indice
+		 * i dans la liste listeActionTitre.
+		 * Cela se traduira par deux actions :
+		 *   - supprimer l'objet de la liste (on ne les possède plus)
+		 *   - augmenter le budget de la valeur de la vente
+		 * On notera quelques fonctions utiles de l'interface List:
+		 *   List.remove(int i) => supprimer l'élément d'indice i
+		 *   List.get(int i) => renvoit l'objet d'indice i
+		 * */
 		return 0.0;
 	}
 	public double vendre(ActionTitre act) throws Exception
 	{
+		/* TODO : modifier cette fonction de sorte qu'elle vende l'actionTitre donnée
+		 * en argument, exactement comme précédemment.
+		 * Cette ActionTitre doit nécessairement se trouver dans la liste listeActionTitre.
+		 * On préfèrera un appel à la méthode précédente que de la réécrire.
+		 */
 		return 0.0;
 	}
 	
 	public void acheter(ActionQuotation actQuotation, int nb) throws Exception {
-		
+		/* TODO : ici il s'agira de faire l'inverse évidemment !
+		 * On ajoute à la liste listeActionTitre un nouvel ojet ActionTitre,
+		 * construit à partir des arguments de cette méthode, et on retire le coût 
+		 * (égale au produit du nombre d'action et du cours actuel de l'ActionQuotation)
+		 * du budget.
+		 */
 	}
 	
 	public List<ActionTitre> getListeActionTitre() { return listeActionTitre; }
