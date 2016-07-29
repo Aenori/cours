@@ -9,23 +9,28 @@ request_line_re = re.compile( '(?P<ip_address>[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}
 #print( request_line_re.groups )
 print( request_line_re.groupindex )
 
+def write_column_headers( output_file ):
+    for k, v in sorted( request_line_re.groupindex.items(), key = lambda x:x[1] ):
+        output_file.write( k + (";" if v != request_line_re.groups else "\n") )
+
+def write_log_line_as_csv( output_file, re_match ):
+    for it in range(1, request_line_re.groups + 1 ):
+        output_file.write( re_match.group(it).replace(";",",") + (";" if it != request_line_re.groups else "\n") )
+
 def main( filename ):
     print( "Opening file {0} ...".format( filename ) )
     print( "Writing to file {0} ...".format( filename + ".csv" ) )
 
     with open( filename, 'r' ) as input_file:
         with open( filename + ".csv", 'w' ) as output_file:
-            for k, v in sorted( request_line_re.groupindex.items(), key = lambda x:x[1] ):
-                output_file.write( k + (";" if v != request_line_re.groups else "\n") )
-
+            write_column_headers( output_file )
             with open( filename + ".reject", 'w' ) as reject_file :
-                for it_line_number, it_line in enumerate( input_file ):
+                for it_line in input_file:
                     if it_line.startswith("<br/>"):
                         it_line = it_line[5:]
                     re_match = request_line_re.match( it_line )
                     if re_match:
-                        for it in range(1, request_line_re.groups + 1 ):
-                            output_file.write( re_match.group(it).replace(";",",") + (";" if it != request_line_re.groups else "\n") )
+                        write_log_line_as_csv( output_file, re_match )
                     else:
                         reject_file.write( it_line ) 
 
