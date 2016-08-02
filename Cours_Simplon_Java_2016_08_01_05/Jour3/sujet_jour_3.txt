@@ -1,2 +1,41 @@
 Sujet jour 3 : algorithmie, manipulation xml et tests unitaires
 
+A partir d'aujourd'hui et jusqu'à la fin de la semaine, nous continuerons à travailler sur le même projet java, pas la peine d'en recréer.
+
+A noter qu'aujourd'hui, nous allons utiliser des fichiers xsd et ReadAndWriteFiles légèrement modifiés, vous pouvez soit recréer un projet si vous souhaitez garder votre travail d'hier intact, ou modifier le projet d'hier (pour aujourd'hui cela n'a pas d'importance).
+
+Avant toute chose :
+  ======================
+  1/ Récupérer les fichiers all_info.xsd, Utils.java, ReadAndWriteFiles.java sur github ou slack 
+  2/ Supprimer tous les fichiers générés à partir des xsd hier et générer les fichiers à partir de all_info.xsd, dans un package edu.simplon.xml_input. Ligne de commande : 
+      xjc -d {REPERTOIRE_SRC_DE_VOTRE_PROJET} -p edu.simplon.xml_input all_info.xsd
+    Ce xsd contient à la fois les infos pour PriceInfo, DescriptionInfo et AllInfo.
+    A noter que les types Item ont été renommé ItemPriceType (id et prix), ItemDescriptionType (id, brand, titre, catégories) et ItemAllType (toutes les infos)
+  ======================
+
+L'objectif d'aujourd'hui est d'implémenter les fonctions suivantes :
+- fusion de deux fichiers
+- tri d'un fichier
+- être capable de savoir dans une liste d'id, lesquels sont dans le fichier
+Et de faire tout cela avec des tests unitaires propres.
+
+Les exercices ne sont pas obligatoires, ils sont là pour fournir des guidelines si besoin.
+
+A noter que les id sont représentés par JAXB par des BigInteger. Vous pouvez les convertir depuis ou vers un entier ainsi :
+int a = 0;
+BigInteger.valueOf( 
+
+Exercice 1:
+===========
+
+On va commencer par mettre en place des éléments pour les tests unitaires.  
+Pensez à ajouter le chemin vers le jar de JUnit dans le build path.  
+Créez une classe de test unitaire, par exemple TestFichiersXML, qui héritera de TestCase, dans un package à part.  
+Dans cette classe, on va définir une méthode pour comparer les différents Items.  
+Créer 3 méthodes:
+  assertEqualsPriceItem( 
+
+
+
+
+
