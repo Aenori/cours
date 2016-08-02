@@ -1,0 +1,48 @@
+
+=> Correction des exercices d'hier
+
+=> Présentation structure des données json & xml  
+
+=> XML, présentation d'un xsd
+
+=> Génération de classe à partir du xsd en utilisant jaxb
+
+La ligne de commande (sous linux ou mac) est la suivante :
+
+xjc -d description_info -p edu.simplon.xml_description description_info.xsd
+
+Où :
+  -d description_info signifie que l'on génrera les classes dans le répertoire description_info
+  -p est le nom du package qui contiendra les classes
+
+Du fait qu'un objet de même nom "ObjectFactory.java" est systématiquement généré, 
+faire bien attention à utiliser un package spécifique pour chaque fichier xsd.  
+
+Pour les utilisateurs de windows:
+
+xjc ne fonctionnera probablement pas, il va falloir trouver le fichier xjc.exe dans votre 
+répertoire d'installation java. La ligne de commande ressemblera plus à quelque chose du type :
+
+"C:/program files/java/java-s1.7/bin/jc.exe" -d description_info -p edu.simplon.xml_description description_info.xsd
+
+(Google où la recherche interne windows sont vos amis pour trouver l'emplacement précis du fichier)
+
+=> Manipulation de fichiers
+
+Commencer par vous familiariser avec l'interface.  
+Dans une fonction, directement dans le main, comme vous voulez, essayer de lire le fichier, parcourir les éléments,  
+afficher les id, afficher les détails de l'éléments ...
+Queque part dans votre projet, créez des fonctions pour afficher correctement les objets :  
+
+DescriptionInfo.Items.Item et
+PriceInfo.Items.Item
+
+L'objectif sera d'écrire des fonctions capables de merger les deux fichiers d'entrée (par correspondance d'id)  
+de faire des extractions de ces fichiers, de les trier, etc ...  
+
+On utilisera notamment des extractions de fichiers pour faire des tests unitaires.  
+
+Commencer à écrire une fonction extraire_item, qui prend en entrée une chaîne de caractères et un entier, par exemple :
+  public DescriptionInfo extraire_item( String file_name, int nb_item )
+
+
