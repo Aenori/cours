@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Nicolas Rousset" />
+  <title>Simplon : Java</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+   href="pandoc.css" />
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Simplon : Java</h1>
+  <p class="author">
+Nicolas Rousset
+  </p>
+  <p class="date">1er au 5 août 2016</p>
+</div>
+<div id="i.-ojectifs-pédagogiques" class="slide section level1">
+<h1>I. Ojectifs pédagogiques</h1>
+<p>Les principaux objectifs de cette semaine sont les suivants :</p>
+<pre>Objectifs pédagogiques :  
+- Gestion de projet hors framework  
+- Pratique de l'algorithmie  
+</pre>
+
+<p>Que l'on peut décliner plus précisément :</p>
+<pre>Gestion de projet hors framework :
+- Manipulation de base en java
+- Utilisation d'un exécutable
+- Test unitaires
+</pre>
+
+<p>Et pour la partie algorithmie</p>
+<pre>Algorithmie : 
+- Manipulation de listes et de dictionnaires
+- Accès aux données
+</pre>
+
+</div>
+<div id="ii.-planning-général" class="slide section level1">
+<h1>II. Planning général</h1>
+<h2 id="jour-1-introduction-algorithmie-de-base-manipulation-de-listes">Jour 1 : introduction, algorithmie de base, manipulation de listes</h2>
+<p>Petite introduction type jeu de rôle &quot;vous êtes une équipe de data-scientist ...&quot;, petite introduction sur les différents types d'intégration pour justifier le fait de faire un programme &quot;from scratch&quot;.<br />Algorithmie de base sur des objets simples (3, 4 attributs) notamment sur les prix : sélection de l'article le plus cher, le moins cher, d'une liste d'article correspondant à une fourchette de prix, recherche d'articles ayant le même prix.<br />Comment accélérer ces algorithmes ?? Implémentation d'une recherche dichotomque, ré-implémentation des exercices précédents sur une liste triée, algorithmes de tri pour les plus avancés.</p>
+<h2 id="jour-2-test-unitaire-manipulation-de-fichiers-xml">Jour 2 : test unitaire, manipulation de fichiers xml</h2>
+<p>Matin : développement de tests unitaires pour les fonctions précédentes avec JUnit<br />Après-midi : lecture de fichiers XML, intégration dans les fonctionnalités précédentes</p>
+<h2 id="jour-3-suite-de-la-manipulation-de-fichiers-xml-xml-relationnels">Jour 3 : suite de la manipulation de fichiers xml, xml relationnels</h2>
+<p>Matin : suite de la manipulation sur les fichiers XML<br />Après-midi : XML relationnel, une liste de promotion sur les produits est fournie en entrée, il faut en tenir compte en interne</p>
+<h2 id="jour-4-algorithmie-plus-avancée-moteur-de-recommandation-produit-similaire">Jour 4 : algorithmie plus avancée: moteur de recommandation, produit similaire</h2>
+<h2 id="jour-5-à-définir">Jour 5 : à définir</h2>
+</div>
+<div id="iii.-planning-détaillé" class="slide section level1">
+<h1>III. Planning détaillé</h1>
+<h2 id="jour-1-introduction-cadre-du-projet-travail-sur-des-listes-test-unitaires">Jour 1 : introduction, cadre du projet, travail sur des listes, test unitaires</h2>
+<p>Dans le cadre de cette journée, les données ne seront pas lues, mais fournies sous forme de code java qui assure automatiquement l'instanciation des données.</p>
+<p><b>9h -&gt; 10h</b> : Présentation du projet en mode &quot;jeu de rôle&quot;, vous êtes une équipe de data-scientist, on vous demande de fournir des services.<br />Question autour des modes d'intégration, dll, webservice, service et programmes<br /><b>10h -&gt; 13h</b> : Première séance d'exercice, manipulation de base sur une liste d'objet non triée, notamment sur les prix.<br /><b>13h -&gt; 14h</b> : <i>Pause déjeuner</i><br /><b>14h -&gt; 14h45</b> : Remarques sur les exercices du matin, comment les accélérer ? Recherche dichotomique, tris<br /><b>14h45 -&gt; 17h30</b> : Codage de la recherche dichotomique, d'algorithme de tris</p>
+<h2 id="jour-2-manipulation-de-fichiers-algorithmie-sur-les-fichiers-html">Jour 2 : manipulation de fichiers, algorithmie sur les fichiers html</h2>
+<p><b>9h -&gt; 10h</b> : Feedback sur la journée d'hier + debrief sur les notions d'intégration, dll, webservice, processus<br /><b>10h -&gt; 13h</b> : Mise en place de tests unitaires<br /><b>13h -&gt; 14h</b> : <i>Pause déjeuner</i><br /><b>14h -&gt; 14h45</b> : Présentation lecture XML</p>
+</div>
+<div id="présentations" class="slide section level1">
+<h1>Présentations</h1>
+</div>
+<div id="détails-des-exercices" class="slide section level1">
+<h1>Détails des exercices</h1>
+<h2 id="jour-1-introduction-algorithmie-de-base-manipulation-de-listes-1">Jour 1 : introduction, algorithmie de base, manipulation de listes</h2>
+<h3 id="matin">Matin :</h3>
+<ul class="incremental">
+<li>Exercice 1 : codage d'une fonction &quot;afficher les éléments d'une liste&quot; (4 lignes)</li>
+<li>Exercice 2 : codage d'une fonction toString (4 lignes)</li>
+<li>Exercice 3 : minimum et maximum d'une liste non triée (4 lignes)</li>
+<li>Exercice 4 : trouver l'ensemble des éléments compris dans une fourchette de prix (6 lignes)</li>
+<li>Exercice 5 : détecter si il existe au moins deux éléments ayant des prix identiques (6 lignes)</li>
+<li>Exercice 6 : trouver l'ensemble des éléments ayant un prix identiques sur une liste non triée</li>
+</ul>
+<h3 id="après-midi">Après-midi :</h3>
+<ul class="incremental">
+<li>Exercice 7 : codage d'une recherche dichotomique</li>
+<li>Exercice 8 à 11 : réécrire les exercices 3 à 6 de façon efficace sur une liste triée</li>
+<li>Exercice 12 et + : implémentation de tris</li>
+</ul>
+</div>
+</body>
+</html>

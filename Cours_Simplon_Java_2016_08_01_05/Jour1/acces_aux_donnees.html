@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Nicolas Rousset" />
+  <title>Simplon : Java</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Simplon : Java</h1>
+  <p class="author">
+Nicolas Rousset
+  </p>
+  <p class="date">1er au 5 août 2016</p>
+</div>
+<div id="accès-aux-données" class="slide section level1">
+<h1>Accès aux données</h1>
+<p>Il s'agit d'un problème omniprésent en informatique, qui apparaît notamment avec les bases de données et le choix des conteneurs utilisés en programmation, mais aussi dans les structures de fichiers.</p>
+<p>Il existe 4 moyens d'accéder aux données avec un critère :</p>
+<ul>
+<li>l'accès direct</li>
+<li>l'accès par recherche dichotomique</li>
+<li>le parcours complet</li>
+<li>l'accès par table de hachage (qui est un peu à part)</li>
+</ul>
+</div>
+<div id="accès-direct" class="slide section level1">
+<h1>Accès direct</h1>
+<p>C'est le plus rapide, on peut le considérer comme instantané.<br />
+C'est l'accès aux vecteurs ou tableau / array, par exemple :</p>
+<pre><code>int[] tab = new int[1000];
+System.out.println( tab[125] ); </code></pre>
+<p>L'ordinateur calcule directement l'adresse mémoire de l'élément 125 du tableau à partir de l'adresse du tableau et il n'y a pas de recherche.<br />
+Il est peu utilisé dans les bases de données.</p>
+</div>
+<div id="accès-par-parcours-complet" class="slide section level1">
+<h1>Accès par parcours complet</h1>
+<p>Maintenant si on veut accéder à un objet à partir de ces propriétés, par exemple son nom, on peut utiliser un code du type :</p>
+<pre><code>public static Item recherche_par_nom( List&lt;Item&gt; list, String nom )
+{
+    for( Item item : list )
+    {
+        if( item.getNom().equals( nom ) )
+        {
+            return item;
+        }
+    }
+    return null;
+}</code></pre>
+<p>Le temps que cela prend est proportionnel au nombre de données (on parle de temps de calcul ou de complexité linéaire)</p>
+</div>
+<div id="accès-par-recherche-dichotomique" class="slide section level1">
+<h1>Accès par recherche dichotomique</h1>
+<ul>
+<li>Comment cherchez-vous dans un dictionnaire ?</li>
+<li>Savez-vous où est le mot ?</li>
+<li>Est-ce que vous les lisez tous ?</li>
+</ul>
+</div>
+<div id="accès-par-recherche-dichotomique-2" class="slide section level1">
+<h1>Accès par recherche dichotomique (2)</h1>
+<p>Le principe de la recherche dichotomique est d'exclure plus ou moins la moitié des éléments à chaque itération.<br />
+Exemple, j'ai un tableau de 50 personnes, trié par nom de famille. Je cherche le nom &quot;Stark Eddard&quot;</p>
+<ol style="list-style-type: decimal">
+<li>Je regarde le nom du milieu (indice 24), c'est Lannister Tywin =&gt; Stark Eddard est dans la deuxième moitié (reste 25)</li>
+<li>Je regarde le nom d'indice 37 =&gt; Payne Podrick, Stark Eddard est après (reste 12)<br />
+</li>
+<li>Je regarde le nom d'indice 44 =&gt; Targaryen Rhaegar, Stark Eddard est avant (reste 6)<br />
+</li>
+<li>Je regarde le nom d'indice 40 =&gt; Stark Arya, Stark Eddard est après (reste 3)</li>
+<li>Je regarde le nom d'indice 42 =&gt; Stark Sansa, Stark Eddard est avant (reste 1)</li>
+<li>On vérifie que le nom d'indice 41 est bien Eddard Stark</li>
+</ol>
+<p>Il me faut 6 itérations pour trouver le nom, mais si j'ai deux fois plus de nom, il ne m'en faudra que 7, c'est un algorithme très efficace !</p>
+</div>
+<div id="accès-par-recherche-dichotomique-3" class="slide section level1">
+<h1>Accès par recherche dichotomique (3)</h1>
+<p>La recherche dichotomique ne peut se faire que sur une structure ordonnée, par exemple un tableau trié.</p>
+<p>Quelles sont les limites du tri du tableau ? (qui font entre autres que l'on utilisera pas cette méthode sur une base de donnée)</p>
+</div>
+<div id="accès-par-recherche-dichotomique-4" class="slide section level1">
+<h1>Accès par recherche dichotomique (4)</h1>
+<p>Limites du tri du tableau :</p>
+<ol style="list-style-type: decimal">
+<li>C'est potentiellement un peu long<br />
+</li>
+<li>On ne peut trier que sur un seul critère<br />
+</li>
+<li>Cela peut être très coûteux de rajouter un élément</li>
+</ol>
+</div>
+<div id="accès-par-recherche-dichotomique-5" class="slide section level1">
+<h1>Accès par recherche dichotomique (5)</h1>
+<p>Une des solutions est un arbre binaire de recherche :</p>
+<div class="figure">
+<img src="img/arbre_binaire_recherche.png" title="Arbre binaire de recherche" width="600" />
+
+</div>
+<p>Elle est implémentée en java par la classe TreeMap.</p>
+</div>
+<div id="remarque-sur-la-recherche-dichotomique" class="slide section level1">
+<h1>Remarque sur la recherche dichotomique</h1>
+<p>La dichotomie une méthode un peu générale qui consiste à découper un ensemble en partie plus petites.<br />
+On peut aussi l'utiliser pour résoudre des équations.</p>
+</div>
+<div id="accès-par-table-de-hachage" class="slide section level1">
+<h1>Accès par table de hachage</h1>
+<p>Vous êtes 13, du coup avec une recherche dichotomique, je peux trouver n'importe qui en 4 itérations.<br />
+Mais est-ce qu'il ne serait pas possible de le faire encore plus vite, en 1 itération ?<br />
+Comme avec un accès direct ?</p>
+</div>
+<div id="accès-par-table-de-hachage-2" class="slide section level1">
+<h1>Accès par table de hachage (2)</h1>
+<p>Je pourrais mettre les objets vous représentant dans un vecteur et cosidérer que la première lettre de votre nom correspond à votre position dans le vecteur.<br />
+Par exemple si votre nom commence par <strong>A</strong>, vous êtes à la premère position (indice 0)<br />
+si votre nom commence par <strong>M</strong>, vous êtes à la treizième position (indice 12)</p>
+<p>C'est implémenté par la classe java HashMap.</p>
+<p>Cela peut effectivement être très rapide. Quel est la limite ?</p>
+</div>
+<div id="accès-par-table-de-hachage-3" class="slide section level1">
+<h1>Accès par table de hachage (3)</h1>
+<p>Dans mon exemple il y a un souci si plusieurs personnes ont des noms commençant par la même lettre.<br />
+De façon générale, quelque soit la fonction de hashage (celle qui associe à une caractéristique un entier) il peut y avoir plusieurs éléments qui produisent la même clé de hashage.<br />
+Cela peut devenir particulièrement problématique si on ajoute/enlève des éléments en nombre important, c'est pour cela que l'on ne l'utilise pas dans les bases de données.<br />
+Par contre c'est souvent le choix par défaut en interne d'une application.</p>
+</div>
+<div id="que-faut-il-retenir" class="slide section level1">
+<h1>Que faut-il retenir ?</h1>
+<p>Il y a 3 principales façon d'accéder à des éléments :<br />
+- accès direct (instantané)<br />
+- recherche dichotomique, cela nécessite une structure adaptée (triée)<br />
+- parcours complet, cela ne nécessite rien, mais c'est potentiellement très long</p>
+</div>
+<div id="des-questions" class="slide section level1">
+<h1>Des questions ?</h1>
+</div>
+</body>
+</html>
