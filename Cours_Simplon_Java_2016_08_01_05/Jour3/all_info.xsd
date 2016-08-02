@@ -1,0 +1,60 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="descriptionInfo">
+  		<xs:complexType>
+    		<xs:sequence>
+				<xs:element name="items" type="itemsNodeType" />
+    		</xs:sequence>
+  		</xs:complexType>
+  	</xs:element>
+  	<xs:element name="priceInfo">
+  		<xs:complexType>
+    		<xs:sequence>
+				<xs:element name="items" type="itemsNodeType" />
+    		</xs:sequence>
+  		</xs:complexType>
+  	</xs:element>
+  	<xs:element name="allInfo">
+  		<xs:complexType>
+    		<xs:sequence>
+    			<xs:element name="request" type="requestType" minOccurs="0" maxOccurs="1"/>
+    			<xs:element name="previousCommands" minOccurs="0" maxOccurs="1">
+    				<xs:complexType>
+    					<xs:sequence>
+							<xs:element name="command" maxOccurs="unbounded" type="commandType" />
+    					</xs:sequence>
+  					</xs:complexType>
+    			</xs:element>
+				<xs:element name="items" type="itemsNodeType" />
+    		</xs:sequence>
+  		</xs:complexType>
+    </xs:element>
+    <xs:element name="itemInfo" type="itemType">
+    </xs:element>
+    <xs:element name="requestInfo" type="requestType">
+    </xs:element>
+  	<xs:complexType name="itemsNodeType" >
+    	<xs:sequence>
+      		<xs:element name="item" maxOccurs="unbounded" type="itemType" />
+    	</xs:sequence>
+  	</xs:complexType>
+  	<xs:complexType name="itemType">
+		<xs:sequence>
+            <xs:element name="id" type="xs:positiveInteger"/>
+            <xs:element name="brand" type="xs:string"      minOccurs="0" maxOccurs="1"/>
+            <xs:element name="categories" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="title" type="xs:string"      minOccurs="0" maxOccurs="1"/>
+            <xs:element name="price" type="xs:decimal"     minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="commandType">
+		<xs:sequence>
+            <xs:element name="id" type="xs:positiveInteger" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+	<xs:complexType name="requestType">
+		<xs:choice>
+            <xs:element name="similarItem"    type="itemType" />
+            <xs:element name="recommandation" type="commandType" />
+        </xs:choice>
+    </xs:complexType>
+</xs:schema>
