@@ -2,14 +2,14 @@
 	<xs:element name="descriptionInfo">
   		<xs:complexType>
     		<xs:sequence>
-				<xs:element name="items" type="itemsNodeType" />
+				<xs:element name="items" type="itemsNodeDescType" />
     		</xs:sequence>
   		</xs:complexType>
   	</xs:element>
   	<xs:element name="priceInfo">
   		<xs:complexType>
     		<xs:sequence>
-				<xs:element name="items" type="itemsNodeType" />
+				<xs:element name="items" type="itemsNodePriceType" />
     		</xs:sequence>
   		</xs:complexType>
   	</xs:element>
@@ -24,20 +24,42 @@
     					</xs:sequence>
   					</xs:complexType>
     			</xs:element>
-				<xs:element name="items" type="itemsNodeType" />
+				<xs:element name="items" type="itemsNodeAllType" />
     		</xs:sequence>
   		</xs:complexType>
     </xs:element>
-    <xs:element name="itemInfo" type="itemType">
-    </xs:element>
     <xs:element name="requestInfo" type="requestType">
     </xs:element>
-  	<xs:complexType name="itemsNodeType" >
-    	<xs:sequence>
-      		<xs:element name="item" maxOccurs="unbounded" type="itemType" />
-    	</xs:sequence>
-  	</xs:complexType>
-  	<xs:complexType name="itemType">
+    <xs:complexType name="itemsNodeDescType" >
+        <xs:sequence>
+            <xs:element name="item" maxOccurs="unbounded" type="itemDescType" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="itemsNodePriceType" >
+        <xs:sequence>
+            <xs:element name="item" maxOccurs="unbounded" type="itemPriceType" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="itemsNodeAllType" >
+        <xs:sequence>
+            <xs:element name="item" maxOccurs="unbounded" type="itemAllType" />
+        </xs:sequence>
+    </xs:complexType>
+  	<xs:complexType name="itemDescType">
+		<xs:sequence>
+            <xs:element name="id" type="xs:positiveInteger"/>
+            <xs:element name="brand" type="xs:string"      minOccurs="0" maxOccurs="1"/>
+            <xs:element name="categories" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="title" type="xs:string"      minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+  	<xs:complexType name="itemPriceType">
+		<xs:sequence>
+            <xs:element name="id" type="xs:positiveInteger"/>
+            <xs:element name="price" type="xs:decimal"     minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+  	<xs:complexType name="itemAllType">
 		<xs:sequence>
             <xs:element name="id" type="xs:positiveInteger"/>
             <xs:element name="brand" type="xs:string"      minOccurs="0" maxOccurs="1"/>
@@ -53,7 +75,7 @@
     </xs:complexType>
 	<xs:complexType name="requestType">
 		<xs:choice>
-            <xs:element name="similarItem"    type="itemType" />
+            <xs:element name="similarItem" type="itemAllType" />
             <xs:element name="recommandation" type="commandType" />
         </xs:choice>
     </xs:complexType>
