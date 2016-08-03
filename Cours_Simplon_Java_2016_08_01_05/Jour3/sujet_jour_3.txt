@@ -58,7 +58,8 @@ Par exemple:
 
 extraire_partie_fichier( "data_xml/description_info_1000.xml", "data_xml/test_result/exo02_desc_info_extraits.xml", 10 );
 
-Créera un fichier data_xml/test_result/exo02_desc_info_extraits.xml qui contiendra les 10 premiers éléments (Item) du fichier data_xml/description_info_1000.xml.  
+Créera un fichier data_xml/test_result/exo02_desc_info_extraits.xml qui contiendra les 10 premiers éléments 
+(Item) du fichier data_xml/description_info_1000.xml.  
 (Pensez à créer préalablement le répertoire data_xml/test_result)
 
 Créer un test unitaire qui comparera data_xml/test_result/exo02_desc_info_extraits.xml avec le fichier de reférence 
@@ -155,7 +156,8 @@ On veut maintenant comparer des listes de type List< ItemAllType >.
 Il s'agira du comparaison terme à terme, on regarde si les deux premiers éléments de chaque liste sont égaux, puis les 
 deux suivants, etc ...   
 
-Ecrivez une fonction qui prend en argument deux listes de type List< ItemAllType > et qui renvoit true si elles sont identiques, false sinon.
+Ecrivez une fonction qui prend en argument deux listes de type List< ItemAllType > et qui renvoit true si 
+elles sont identiques, false sinon.
 
 On affichera un message pour indiquer quel est l'indice du premier élément qui n'était pas identique entre les deux 
 listes.  
@@ -168,8 +170,8 @@ exo07_prices_all_info_3.xml et exo07_prices_all_info_4.xml, seuls les deux premi
 Exercice 8: comparaison de fichier
 ===========
 
-En utilisant la fonction de l'exercice précédent, écrire une fonction qui prend en argument deux chaine de caractère correspondant à deux
-fichiers de type AllInfo, et qui renvoit true si ils sont identiques. 
+En utilisant la fonction de l'exercice précédent, écrire une fonction qui prend en argument deux chaine de 
+caractère correspondant à deux fichiers de type AllInfo, et qui renvoit true si ils sont identiques. 
 
 Exercice 9: tri d'un fichier
 ===========
