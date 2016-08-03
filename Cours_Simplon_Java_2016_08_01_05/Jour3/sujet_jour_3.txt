@@ -97,6 +97,12 @@ fichier (la somme des prix divisée par le nombre d'éléments).
 Testez là sur le fichier exo04_price_info.xml dont la moyenne des prix doit être de 42 (et faites un test unitaire 
 pour automatiser ce test).
 
+Exercice 4.2: comptage de marque
+===========
+
+Ecrire une fonction compterMarque qui prend entrée un objet de type DescriptionInfo et une chaine de caractère,
+et renvoit le nombre d'occurrence de la marque dans le fichier xml.
+
 Exercice 5: comparaison d'Item
 ===========
 
