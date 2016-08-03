@@ -115,7 +115,8 @@ Exercice 6: test unitaire exercice 5
 On va maintenant ajouter un test unitaire pour les méthodes précédentes (enfin deux d'entre elles)  
 Dans cette classe, on va définir une méthode pour comparer les différents Items.  
 
-Créer un test unitaire que vous appelerez testExercice05 qui lira les fichiers exo05_desc_info.xml et exo05_prices_info.xml, 
+Créer un test unitaire que vous appelerez testExercice05 qui lira les fichiers exo05_desc_info.xml et 
+exo05_prices_info.xml, 
 et comparera les items 2 à 2, sachant que seuls les premiers items et dernier items de chaque fichier sont identiques.  
 Téléchargez ces fichiers et mettez les dans un répertoire data_xml/test dans votre projet.  
 
@@ -129,7 +130,9 @@ for(int i = 0; i < dInfo.getItems().getItem().size() ; ++i )
 {
     for(int j = j; i < dInfo.getItems().getItem().size() ; ++i )
     {
-        boolean areEquals = Utils.areEqualsItem( dInfo.getItems().getItem().get(i), dInfo.getItems().getItem().get(j) );
+        boolean areEquals = Utils.areEqualsItem( 
+            dInfo.getItems().getItem().get(i), 
+            dInfo.getItems().getItem().get(j) );
         if( i == j || (i == 0 && j == dInfo.getItems().getItem().size() - 1) )
         {
             assertTrue( areEquals );
@@ -141,21 +144,25 @@ for(int i = 0; i < dInfo.getItems().getItem().size() ; ++i )
     }
 }
 
-Et même chose avec le fichier "data_xml/test/exo05_prices_info.xml" et le type PriceInfo (de façon assez génante, il n'est pas évident de factoriser
+Et même chose avec le fichier "data_xml/test/exo05_prices_info.xml" et le type PriceInfo (de façon assez génante, il n'est
+ pas évident de factoriser
 ces codes sans modifier les classes PriceInfo et DescriptionInfo).
 
 Exercice 7: comparaison de liste 
 ===========
 
 On veut maintenant comparer des listes de type List< ItemAllType >. 
-Il s'agira du comparaison terme à terme, on regarde si les deux premiers éléments de chaque liste sont égaux, puis les deux suivants, etc ...   
+Il s'agira du comparaison terme à terme, on regarde si les deux premiers éléments de chaque liste sont égaux, puis les 
+deux suivants, etc ...   
 
 Ecrivez une fonction qui prend en argument deux listes de type List< ItemAllType > et qui renvoit true si elles sont identiques, false sinon.
 
-On affichera un message pour indiquer quel est l'indice du premier élément qui n'était pas identique entre les deux listes.  
+On affichera un message pour indiquer quel est l'indice du premier élément qui n'était pas identique entre les deux 
+listes.  
 Si les listes ne sont pas de même taille, on l'indiquera mais on comparera quand même les premiers éléments.  
 
-Pour le tests unitaires, utilisez les listes issues des lectures des fichiers exo07_prices_all_info_1.xml, exo07_prices_all_info_2.xml,
+Pour le tests unitaires, utilisez les listes issues des lectures des fichiers exo07_prices_all_info_1.xml,
+exo07_prices_all_info_2.xml,
 exo07_prices_all_info_3.xml et exo07_prices_all_info_4.xml, seuls les deux premiers doivent avoir des listes identiques.
 
 Exercice 8: comparaison de fichier
@@ -167,8 +174,8 @@ fichiers de type AllInfo, et qui renvoit true si ils sont identiques.
 Exercice 9: tri d'un fichier
 ===========
 
-Implémentez une fonction triAllInfo, qui prend en entrée un objet de type AllInfo, et qui trient la liste des items par ordre croissant d'id,
-et ne renvoit rien.
+Implémentez une fonction triAllInfo, qui prend en entrée un objet de type AllInfo, et qui trient la liste des items par
+ordre croissant d'id, et ne renvoit rien.
 
 Sa signature sera donc du type :
 
@@ -201,32 +208,34 @@ exo09_all_info_non_trie.xml    en exo09_all_info_trie.xml
 Exercice 10: générécisation
 ============
 
-A votre avis comment faire pour que la méthode précédente fonctionne également avec des listes de type List< ItemPriceType > et 
-List< ItemDescType > ??
+A votre avis comment faire pour que la méthode précédente fonctionne également avec des listes de type 
+List< ItemPriceType > et List< ItemDescType > ??
 
 Exercice 11: suppression des doublons
 ============
 
-Ecrire une fonction suppressionDoublons, qui prend en argument une liste de ItemAllType et qui supprime les doublons, ie quand il y
-a plusieurs éléments d'id identiques, elle n'en garde qu'un.
+Ecrire une fonction suppressionDoublons, qui prend en argument une liste de ItemAllType et qui supprime les doublons, 
+ie quand il y a plusieurs éléments d'id identiques, elle n'en garde qu'un.
 
 Exercice 12: suppression de doublon avec log 
 ============
 
-Ecrire une fonction suppressionDoublons qui prend en argument trois chaines de caractère correspondent à trois noms de fichiers, de type :
+Ecrire une fonction suppressionDoublons qui prend en argument trois chaines de caractère correspondent à trois noms  
+de fichiers, de type :
 
 pubic static void suppressionDoublons( String nomFichierEntree, String nomFichierSortie, String nomFichierDoublons )
 
-Et qui supprime les doublons du fichier d'entrée, écrit le résultat dans le fichier de sortie, et les éléments supprimés (les doublons)
-dans le troisième.   
+Et qui supprime les doublons du fichier d'entrée, écrit le résultat dans le fichier de sortie, et les éléments 
+supprimés (les doublons) dans le troisième.   
 
 Exercice 13: éléments commun entre deux listes
 ============
 
 Ecrire une fonction : 
 
-public static List<long> extraireElementsCommuns( List<long> liste1, List<long> liste2 ) qui prend en entrée deux listes d'entiers 
-(qui correspondent à des ids) et qui renvoit la liste des éléments qui sont présents dans les deux listes.  
+public static List<long> extraireElementsCommuns( List<long> liste1, List<long> liste2 ) qui prend en entrée deux 
+listes d'entiers (qui correspondent à des ids) et qui renvoit la liste des éléments qui sont présents dans les 
+deux listes.  
 
 Par exemple avec :
 
@@ -256,7 +265,8 @@ List< long > liste2 = new ArrayList<long>();
 liste2.addAll( new long[]{ 1, 2, 3, 4, 5 } );
 List< long >[] liste_tab = extraireElementsCommuns( liste1, liste2 );
 List<long> liste_commun = liste_tab[0]; // liste_commun contient les éléments 1 et 5
-List<long> liste_diff   = liste_tab[1]; // contient les éléments 2,3,4,6 car ils sont dans l'une des listes mais pas dans les deux.
+List<long> liste_diff   = liste_tab[1]; // contient les éléments 2,3,4,6 car ils sont dans l'une des listes 
+    // mais pas dans les deux.
 
 Exercice 15: fusion de données d'entrée
 ============
@@ -269,7 +279,8 @@ Qui fait la fusion basée sur les id des objets ItemPriceType et ItemDescType, e
 
 Cette fonction doit :  
 - ne pas dépendre de l'ordre des données dans les deux structures en entrée
-- ignorer les éléments présents dans une des structures mais pas dans l'autre (il n'existe pas d'élément d'id identique dans l'autre)  
+- ignorer les éléments présents dans une des structures mais pas dans l'autre (il n'existe pas d'élément d'id 
+identique dans l'autre)  
 
 On ignorera pour l'instant le problème des doublons.  
 
@@ -285,6 +296,7 @@ public static void fusionDonneesDEntree(
     String nomFichierPriceInfoIgnores,
     String nomFichierDescriptionInfoIgnores );
 
-Qui effectue la fusion des fichiers donnée en entrée, mais en plus écrit deux fichiers supplémentaires qui contiennt les éléments 
+Qui effectue la fusion des fichiers donnée en entrée, mais en plus écrit deux fichiers supplémentaires 
+qui contiennt les éléments 
 des deux fichiers qui n'ont pas été conservés (parce qu'ils n'étaient pas présents dans les deux fichiers) 
 
