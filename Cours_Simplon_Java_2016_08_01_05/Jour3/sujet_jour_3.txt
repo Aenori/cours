@@ -64,12 +64,12 @@ internet via la recherche apache commons download jar.
 Exercice 3: extraction d'id
 ===========
 
-Ecrire une fonction extraire_liste_id qui prend en entrée un objet DescriptionInfo, et renvoit la liste des ids contenus sous forme d'une List<long>.  
+Ecrire une fonction extraireListeId qui prend en entrée un objet DescriptionInfo, et renvoit la liste des ids contenus sous forme d'une List<long>.  
 
 Ecrivez un test unitaire qui utilise l'objet issu du fichier exo03_desc_info.xml. Une fois la liste obtenue, vous pouvez la tester avec un code du
 type :  
 
-List<long> ma_liste =  extraire_liste_id( ... );
+List<long> ma_liste =  extraireListeId( ... );
 
 assertEquals( "La taille de la liste devrait etre 5 !", 5, ma_liste.size() );
 long[] ref = new long[]{ 37214, 32069, 31909, 32034, 31852 };
@@ -137,18 +137,31 @@ Exercice 7: comparaison de liste
 On veut maintenant comparer des listes de type List< ItemAllType >. 
 Il s'agira du comparaison terme à terme, on regarde si les deux premiers éléments de chaque liste sont égaux, puis les deux suivants, etc ...   
 
+Ecrivez une fonction qui prend en argument deux listes de type List< ItemAllType > et qui renvoit true si elles sont identiques, false sinon.
+
 On affichera un message pour indiquer quel est l'indice du premier élément qui n'était pas identique entre les deux listes.  
 Si les listes ne sont pas de même taille, on l'indiquera mais on comparera quand même les premiers éléments.  
 
 Pour le tests unitaires, utilisez les listes issues des lectures des fichiers exo07_prices_all_info_1.xml, exo07_prices_all_info_2.xml,
 exo07_prices_all_info_3.xml et exo07_prices_all_info_4.xml, seuls les deux premiers doivent avoir des listes identiques.
 
-Exercice 8: tri d'un fichier
+Exercice 8: comparaison de fichier
 ===========
 
-Implémentez des fonctions triFichier (3, donc), qui prennent en entrée des objets de type PriceInfo, DescriptionInfo et AllInfo, et qui trient la liste
-des items par ordre croissant d'id.  
-On pourra s'inspirer du fichier utilisé le premier jour 
+En utilisant la fonction de l'exercice précédent, écrire une fonction qui prend en argument deux chaine de caractère correspondant à deux
+fichiers de type AllInfo, et qui renvoit true si ils sont identiques. 
+
+Exercice 9: tri d'un fichier
+===========
+
+Implémentez une fonction triAllInfo, qui prend en entrée un objet de type AllInfo, et qui trient la liste des items par ordre croissant d'id,
+et ne renvoit rien.
+
+Sa signature sera donc du type :
+
+public static void triAllInfo( List< ItemAllType > );
+
+On pourra s'inspirer du fichier utilisé le premier jour (il s'agit bien de s'inspirer, on ne manipule pas les mêmes objets)
 
     private static class ItemIdComparator implements Comparator<Item> {
         @Override
@@ -168,11 +181,97 @@ On pourra s'inspirer du fichier utilisé le premier jour
         Arrays.sort(getItemTab1000000(), comp);
     }
 
-Comment adapter ce code afin de trier nos List<ItemPriceType>, List<ItemDescType>, List<ItemAllType> ?
-
 Vérifier dans un test unitaire, que cette fonction transforme bien les objets équivalents à :
 
-exo08_prices_info_non_trie.xml en exo08_prices_info_trie.xml
-exo08_desc_info_non_trie.xml en exo08_desc_info_trie.xml
-exo08_all_info_non_trie.xml en exo08_all_info_trie.xml
+exo09_all_info_non_trie.xml    en exo09_all_info_trie.xml
+
+Exercice 10: générécisation
+============
+
+A votre avis comment faire pour que la méthode précédente fonctionne également avec des listes de type List< ItemPriceType > et 
+List< ItemDescType > ??
+
+Exercice 11: suppression des doublons
+============
+
+Ecrire une fonction suppressionDoublons, qui prend en argument une liste de ItemAllType et qui supprime les doublons, ie quand il y
+a plusieurs éléments d'id identiques, elle n'en garde qu'un.
+
+Exercice 12: suppression de doublon avec log 
+============
+
+Ecrire une fonction suppressionDoublons qui prend en argument trois chaines de caractère correspondent à trois noms de fichiers, de type :
+
+pubic static void suppressionDoublons( String nomFichierEntree, String nomFichierSortie, String nomFichierDoublons )
+
+Et qui supprime les doublons du fichier d'entrée, écrit le résultat dans le fichier de sortie, et les éléments supprimés (les doublons)
+dans le troisième.   
+
+Exercice 13: éléments commun entre deux listes
+============
+
+Ecrire une fonction : 
+
+public static List<long> extraireElementsCommuns( List<long> liste1, List<long> liste2 ) qui prend en entrée deux listes d'entiers 
+(qui correspondent à des ids) et qui renvoit la liste des éléments qui sont présents dans les deux listes.  
+
+Par exemple avec :
+
+List< long > liste1 = new ArrayList<long>();
+liste1.addAll( new long[]{ 6, 5, 1 } );
+List< long > liste2 = new ArrayList<long>();
+liste2.addAll( new long[]{ 1, 2, 3, 4, 5 } );
+List< long > liste3 = extraireElementsCommuns( liste1, liste2 );
+
+liste3 doit contenir les éléments 1 et 5 (de préférence dans cet ordre).
+
+Comment faire en sorte que cette algorithme soit efficace ? (ne pas comparer tous les éléments des deux listes 2 à 2) 
+Rappelez vous comment on a fait pour les prix (avec une seule liste, certes, mais le problème est le même)
+
+Exercice 14: extraireElementsCommunsAvecLog
+===========
+
+Ré-écrire une fonction qui fait la même chose que l'exercice 13, mais renvoit deux listes (dans un tableau de liste, donc)
+la première contenant exactement les mêmes éléments que le résultat de l'exercice précédent (les éléments en commun)
+la deuxième contenant les éléments des deux listes qui n'étaient pas en commun.  
+
+Par exemple avec :
+
+List< long > liste1 = new ArrayList<long>();
+liste1.addAll( new long[]{ 6, 5, 1 } );
+List< long > liste2 = new ArrayList<long>();
+liste2.addAll( new long[]{ 1, 2, 3, 4, 5 } );
+List< long >[] liste_tab = extraireElementsCommuns( liste1, liste2 );
+List<long> liste_commun = liste_tab[0]; // liste_commun contient les éléments 1 et 5
+List<long> liste_diff   = liste_tab[1]; // contient les éléments 2,3,4,6 car ils sont dans l'une des listes mais pas dans les deux.
+
+Exercice 15: fusion de données d'entrée
+============
+
+Ecrire une fonction fusionDonneesDEntree, de signature :
+
+public static AllInfo fusionDonneesDEntree( PriceInfo priceInfo, DescriptionInfo descInfo )
+
+Qui fait la fusion basée sur les id des objets ItemPriceType et ItemDescType, en les réunissant dans un objet ItemAllType.  
+
+Cette fonction doit :  
+- ne pas dépendre de l'ordre des données dans les deux structures en entrée
+- ignorer les éléments présents dans une des structures mais pas dans l'autre (il n'existe pas d'élément d'id identique dans l'autre)  
+
+On ignorera pour l'instant le problème des doublons.  
+
+Exercice 16: fusion de données d'entrée avec log
+============
+
+Ecrire une fonction fusionDonneesDEntree, de signature :
+
+public static void fusionDonneesDEntree( 
+    String nomFichierPriceInfo, 
+    String nomFichierDescriptionInfo,
+    String nomFichierResultatAllInfo,
+    String nomFichierPriceInfoIgnores,
+    String nomFichierDescriptionInfoIgnores );
+
+Qui effectue la fusion des fichiers donnée en entrée, mais en plus écrit deux fichiers supplémentaires qui contiennt les éléments 
+des deux fichiers qui n'ont pas été conservés (parce qu'ils n'étaient pas présents dans les deux fichiers) 
 
