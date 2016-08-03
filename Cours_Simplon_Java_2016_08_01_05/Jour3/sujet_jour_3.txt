@@ -92,8 +92,8 @@ for( int i = 0; i < 5 ; ++i )
 Exercice 4: moyenne de prix
 ===========
 
-Ecrire une fonction qui prend entrée un objet de type PriceInfo et renvoit la moyenne des prix sur ce fichier (la somme 
-des prix divisée par le nombre d'éléments).  
+Ecrire une fonction moyennePrix qui prend entrée un objet de type PriceInfo et renvoit la moyenne des prix sur ce 
+fichier (la somme des prix divisée par le nombre d'éléments).  
 Testez là sur le fichier exo04_price_info.xml dont la moyenne des prix doit être de 42 (et faites un test unitaire 
 pour automatiser ce test).
 
@@ -129,7 +129,7 @@ DescriptionInfo dInfo = ReadAndWriteFiles.readXmlFileDescriptionInfo( "data_xml/
 
 for(int i = 0; i < dInfo.getItems().getItem().size() ; ++i )
 {
-    for(int j = j; i < dInfo.getItems().getItem().size() ; ++i )
+    for(int j = i; j < dInfo.getItems().getItem().size() ; ++j )
     {
         boolean areEquals = Utils.areEqualsItem( 
             dInfo.getItems().getItem().get(i), 
