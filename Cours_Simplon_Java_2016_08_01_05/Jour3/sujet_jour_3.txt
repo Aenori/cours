@@ -48,7 +48,7 @@ Exercice 2: extraction d'une partie du fichier
 Ecrire une fonction extraire_partie_fichier qui prend en entrée deux noms de fichiers et un entier, et écrit dans le deuxième fichier les n premiers items du premiers.  
 Par exemple:
 
-extraire_partie_fichier( "data_xml/description_info_1000.xml, "data_xml/test_result/exo02_desc_info_extraits.xml", 10 );
+extraire_partie_fichier( "data_xml/description_info_1000.xml", "data_xml/test_result/exo02_desc_info_extraits.xml", 10 );
 
 Créera un fichier data_xml/test_result/exo02_desc_info_extraits.xml qui contiendra les 10 premiers éléments (Item) du fichier data_xml/description_info_1000.xml.  
 (Pensez à créer préalablement le répertoire data_xml/test_result)
