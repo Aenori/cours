@@ -21,21 +21,158 @@ Et de faire tout cela avec des tests unitaires propres.
 
 Les exercices ne sont pas obligatoires, ils sont là pour fournir des guidelines si besoin.
 
-A noter que les id sont représentés par JAXB par des BigInteger. Vous pouvez les convertir depuis ou vers un entier ainsi :
-int a = 0;
-BigInteger.valueOf( 
-
-Exercice 1:
-===========
-
-On va commencer par mettre en place des éléments pour les tests unitaires.  
+Pour les tests unitaires.  
 Pensez à ajouter le chemin vers le jar de JUnit dans le build path.  
 Créez une classe de test unitaire, par exemple TestFichiersXML, qui héritera de TestCase, dans un package à part.  
+
+A noter que les id sont représentés par JAXB par des BigInteger. Vous pouvez les convertir depuis ou vers un entier ainsi :
+int a = 0;
+BigInteger b = BigInteger.valueOf( a ); // Conversion int -> BigInteger
+long c = b.longValue();                 // Conversion BigInteger -> int 
+
+Exercice 1: aperçu
+===========
+
+Ecrire dans la classe Utils une méthode aperçu, qui prend en entrée un objet de type DescriptionInfo, et affiche les 10 premiers item (sauf si il y en a moins de 10).  
+Tester la avec les objets issus de la lecture des fichiers description_info_5.xml et description_info_1000.xml.
+
+Pour rappel la syntaxe pour lire un fichier est :  
+
+DescriptionInfo dInfo = ReadAndWriteFiles.readXmlFileDescriptionInfo( filename );
+
+Il n'y a pas de test, vu qu'il s'agit d'affichage.
+
+Exercice 2: extraction d'une partie du fichier
+===========
+
+Ecrire une fonction extraire_partie_fichier qui prend en entrée deux noms de fichiers et un entier, et écrit dans le deuxième fichier les n premiers items du premiers.  
+Par exemple:
+
+extraire_partie_fichier( "data_xml/description_info_1000.xml, "data_xml/test_result/exo02_desc_info_extraits.xml", 10 );
+
+Créera un fichier data_xml/test_result/exo02_desc_info_extraits.xml qui contiendra les 10 premiers éléments (Item) du fichier data_xml/description_info_1000.xml.  
+(Pensez à créer préalablement le répertoire data_xml/test_result)
+
+Créer un test unitaire qui comparera data_xml/test_result/exo02_desc_info_extraits.xml avec le fichier de reférence data_xml/test/exo02_desc_info_extraits_ref.xml.  
+On pourra éventuellement utiliser la méthode :  
+
+FileUtils.contentEqualsIgnoreEOL(file1, file2, "utf-8")
+
+Qui permet de comparer deux fichiers. Elle nécessite le fait d'ajouter au projet le jar commons-io-2.5.jar, présent dans le google drive, ou récupérable sur
+internet via la recherche apache commons download jar.  
+
+Exercice 3: extraction d'id
+===========
+
+Ecrire une fonction extraire_liste_id qui prend en entrée un objet DescriptionInfo, et renvoit la liste des ids contenus sous forme d'une List<long>.  
+
+Ecrivez un test unitaire qui utilise l'objet issu du fichier exo03_desc_info.xml. Une fois la liste obtenue, vous pouvez la tester avec un code du
+type :  
+
+List<long> ma_liste =  extraire_liste_id( ... );
+
+assertEquals( "La taille de la liste devrait etre 5 !", 5, ma_liste.size() );
+long[] ref = new long[]{ 37214, 32069, 31909, 32034, 31852 };
+for( int i = 0; i < 5 ; ++i )
+{
+    assertEquals( ref[i], ma_liste.get(i) );
+}
+
+Exercice 4: moyenne de prix
+===========
+
+Ecrire une fonction qui prend entrée un objet de type PriceInfo et renvoit la moyenne des prix sur ce fichier (la somme des prix divisée par le nombre d'éléments).  
+Testez là sur le fichier exo04_price_info.xml dont la moyenne des prix doit être de 42 (et faites un test unitaire pour automatiser ce test).
+
+Exercice 5: comparaison d'Item
+===========
+
+On va ajouter des méthodes utiles à la classe Utils
+
+Créer 3 méthodes dans votre classe:
+  boolean areEqualsItem( ItemPriceType       itemRef, ItemPriceType       itemTest );
+  boolean areEqualsItem( ItemDescriptionType itemRef, ItemDescriptionType itemTest );
+  boolean areEqualsItem( ItemAllType         itemRef, ItemAllType         itemTest );
+
+Qui renvoit True si les objets sont égaux (toutes leurs attributs sont identiques, attention que vous ne pouvez pas comparer directement les objets avec ==).  
+
+Exercice 6: test unitaire exercice 5
+===========
+
+On va maintenant ajouter un test unitaire pour les méthodes précédentes (enfin deux d'entre elles)  
 Dans cette classe, on va définir une méthode pour comparer les différents Items.  
-Créer 3 méthodes:
-  assertEqualsPriceItem( 
 
+Créer un test unitaire que vous appelerez testExercice05 qui lira les fichiers exo05_desc_info.xml et exo05_prices_info.xml, 
+et comparera les items 2 à 2, sachant que seuls les premiers items et dernier items de chaque fichier sont identiques.  
+Téléchargez ces fichiers et mettez les dans un répertoire data_xml/test dans votre projet.  
 
+On utilise la méthode assertTrue ou assertFalse dans ce cas, les méthodes assert ont d'habitude un nom assez explicite.  
 
+Cela donnera un code du type :
 
+DescriptionInfo dInfo = ReadAndWriteFiles.readXmlFileDescriptionInfo( "data_xml/test/exo05_desc_info.xml" );
+
+for(int i = 0; i < dInfo.getItems().getItem().size() ; ++i )
+{
+    for(int j = j; i < dInfo.getItems().getItem().size() ; ++i )
+    {
+        boolean areEquals = Utils.areEqualsItem( dInfo.getItems().getItem().get(i), dInfo.getItems().getItem().get(j) );
+        if( i == j || (i == 0 && j == dInfo.getItems().getItem().size() - 1) )
+        {
+            assertTrue( areEquals );
+        }
+        else
+        {
+            assertFalse( areEquals );
+        }
+    }
+}
+
+Et même chose avec le fichier "data_xml/test/exo05_prices_info.xml" et le type PriceInfo (de façon assez génante, il n'est pas évident de factoriser
+ces codes sans modifier les classes PriceInfo et DescriptionInfo).
+
+Exercice 7: comparaison de liste 
+===========
+
+On veut maintenant comparer des listes de type List< ItemAllType >. 
+Il s'agira du comparaison terme à terme, on regarde si les deux premiers éléments de chaque liste sont égaux, puis les deux suivants, etc ...   
+
+On affichera un message pour indiquer quel est l'indice du premier élément qui n'était pas identique entre les deux listes.  
+Si les listes ne sont pas de même taille, on l'indiquera mais on comparera quand même les premiers éléments.  
+
+Pour le tests unitaires, utilisez les listes issues des lectures des fichiers exo07_prices_all_info_1.xml, exo07_prices_all_info_2.xml,
+exo07_prices_all_info_3.xml et exo07_prices_all_info_4.xml, seuls les deux premiers doivent avoir des listes identiques.
+
+Exercice 8: tri d'un fichier
+===========
+
+Implémentez des fonctions triFichier (3, donc), qui prennent en entrée des objets de type PriceInfo, DescriptionInfo et AllInfo, et qui trient la liste
+des items par ordre croissant d'id.  
+On pourra s'inspirer du fichier utilisé le premier jour 
+
+    private static class ItemIdComparator implements Comparator<Item> {
+        @Override
+        public int compare(Item a, Item b) {
+            return a.getId() < b.getId() ? -1 : a.getId() > b.getId() ? 1 : 0;
+        }
+    }
+    
+    public static void sort_all(boolean by_price_if_not_by_id)
+    {
+        Comparator<Item> comp = by_price_if_not_by_id ? new ItemPriceComparator() : new ItemIdComparator();
+        Arrays.sort(getItemTab10(), comp);
+        Arrays.sort(getItemTab100(), comp);
+        Arrays.sort(getItemTab1000(), comp);
+        Arrays.sort(getItemTab10000(), comp);
+        Arrays.sort(getItemTab100000(), comp);
+        Arrays.sort(getItemTab1000000(), comp);
+    }
+
+Comment adapter ce code afin de trier nos List<ItemPriceType>, List<ItemDescType>, List<ItemAllType> ?
+
+Vérifier dans un test unitaire, que cette fonction transforme bien les objets équivalents à :
+
+exo08_prices_info_non_trie.xml en exo08_prices_info_trie.xml
+exo08_desc_info_non_trie.xml en exo08_desc_info_trie.xml
+exo08_all_info_non_trie.xml en exo08_all_info_trie.xml
 
