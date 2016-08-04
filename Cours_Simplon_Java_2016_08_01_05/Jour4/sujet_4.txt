@@ -1,0 +1,45 @@
+Sujet jour 4 : algorithmie 
+
+Aujourd'hui nous travaillerons sur des listes d'entiers. J'insiste 
+sur le fait que cela ne change pas les algorithmes par rapport au 
+fait de travailler sur des items ou tout autre structures, il s'agit 
+juste de définir les notions d'égalité et d'ordre.  
+
+Préalable :
+
+Créez une classe Algorithms, qui contiendra votre code et qui sera 
+appelée pour les tests unitaires.  
+
+# Exercice 1
+
+En utilisant la fonction Java Collections.sort, écrire une fonction 
+trierEntiers, qui prend en entrée une List<Long> (avec le L majuscule,
+sinon ça ne compile pas, la trie et ne renvoit rien).  
+
+Le code de la focntion est très court, il s'agit juste de vous la faire 
+utiliser une fois. 
+
+# Exercice 2
+
+En utilisant la fonction Java Collections.sort, écrire une fonction 
+trierItems, qui prend en entrée une List<ItemAllType> et la trie.  
+
+Comme les ItemsAllType n'ont pas de fonction de comparaison par défaut
+(méthode compareTo, interface Comparable), il faut lui en fournir une 
+sous la forme d'un comparator.
+
+Par exemple pour comparer des tableaux d'entiers :
+
+private static class ItemIdComparator implements Comparator< Long[] > {
+    @Override
+    public int compare(Long[] a, Long[] b) {
+        return a[0].compareTo( b[0] );
+    }
+}
+
+Puis
+
+List<Long[]> maListe = ...;
+Collections.sort( maListe, new ArrayComparator() );
+
+

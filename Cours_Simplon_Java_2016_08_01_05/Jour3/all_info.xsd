@@ -69,7 +69,7 @@
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="commandType">
-		<xs:sequence>
+	<xs:sequence>
             <xs:element name="id" type="xs:positiveInteger" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
