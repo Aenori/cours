@@ -30,7 +30,7 @@ sous la forme d'un comparator.
 
 Par exemple pour comparer des tableaux d'entiers :
 
-private static class ItemIdComparator implements Comparator< Long[] > {
+private static class ArrayComparator implements Comparator< Long[] > {
     @Override
     public int compare(Long[] a, Long[] b) {
         return a[0].compareTo( b[0] );
