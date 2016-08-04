@@ -16,7 +16,7 @@ En utilisant la fonction Java Collections.sort, écrire une fonction
 trierEntiers, qui prend en entrée une List<Long> (avec le L majuscule,
 sinon ça ne compile pas, la trie et ne renvoit rien).  
 
-Le code de la focntion est très court, il s'agit juste de vous la faire 
+Le code de la fontion est très court, il s'agit juste de vous la faire 
 utiliser une fois. 
 
 # Exercice 2
@@ -30,7 +30,7 @@ sous la forme d'un comparator.
 
 Par exemple pour comparer des tableaux d'entiers :
 
-private static class ItemIdComparator implements Comparator< Long[] > {
+private static class ArrayComparator implements Comparator< Long[] > {
     @Override
     public int compare(Long[] a, Long[] b) {
         return a[0].compareTo( b[0] );
@@ -60,6 +60,9 @@ public static List<Long> supprimerDuplicataQuiNeMarchePas(List<Long> listeEntree
 {
     List<Long> liste = new ArrayList();
     liste.addAll(listeEntree);
+    
+    Collections.sort(liste);
+    
     for(int i = 0; i < liste.size() - 1; ++i)
     {
         if( liste.get(i).equals( liste.get(i+1) ) )
