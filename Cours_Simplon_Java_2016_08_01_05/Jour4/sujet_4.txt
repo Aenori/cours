@@ -42,4 +42,46 @@ Puis
 List<Long[]> maListe = ...;
 Collections.sort( maListe, new ArrayComparator() );
 
+# Exercice 3
+
+Implémenter une fonction qui prend en entrée une liste triée (on n'aura
+pas besoin de le vérifier) et qui renvoit une liste dont les duplicata 
+sont supprimés.
+
+Signature :
+
+List<Long> supprimerDuplicata( List<Long> );
+
+# Exercice 3 bis
+
+Le code suivant ne fonctionne pas pour l'exercice précédent. Pourquoi ?
+
+public static List<Long> supprimerDuplicataQuiNeMarchePas(List<Long> listeEntree)
+{
+    List<Long> liste = new ArrayList();
+    liste.addAll(listeEntree);
+    for(int i = 0; i < liste.size() - 1; ++i)
+    {
+        if( liste.get(i).equals( liste.get(i+1) ) )
+        {
+            liste.remove(i);
+        }
+    }
+    return liste;
+}
+
+# Exercice 4
+
+Ecrire une fonction qui prend en entrée deux listes triées, et renvoit la liste des éléments
+commun aux deux listes.
+
+public static List<Long> garderLesElementsCommuns(List<Long> liste1, List<Long> liste2)
+
+# Exercice 5
+
+Ecrire une fonction qui prend en entrée deux listes triées, et renvoit la fusion, triée, des
+deux listes.
+
+public static List<Long> fusionnerListeTriees(List<Long> liste1, List<Long> liste2)
+
 
