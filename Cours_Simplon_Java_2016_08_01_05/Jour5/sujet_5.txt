@@ -27,7 +27,7 @@ Exercice n°2:
 
 Implémentez dans la classe AllInfoWithAccess une méthode 
 
-getAllTitle()
+getTitleMap()
 
 qui renvoit une map<Integer, String> qui aux id de chaque Item  
 associe leur titre (par exemple pour le premier item, elle 
