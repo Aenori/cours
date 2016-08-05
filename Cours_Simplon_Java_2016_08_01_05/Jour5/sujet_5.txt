@@ -10,7 +10,7 @@ public static Map<Integer,Integer> getMapCarre( int n )
 
 Qui prend en argument un entier n et renvoit une map constituée 
 de n éléments, et qui associe à chaque nombre compris entre 0
-et n-1 sont carré (son produit par lui-même)
+et n-1 son carré (son produit par lui-même)
 
 Par exemple :
 
