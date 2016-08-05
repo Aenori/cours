@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Nicolas Rousset" />
+  <title>Simplon : Java</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Simplon : Java</h1>
+  <p class="author">
+Nicolas Rousset
+  </p>
+  <p class="date">Vendredi 5 août</p>
+</div>
+<div id="structures-classiques-en-java" class="slide section level1">
+<h1>Structures classiques en Java</h1>
+<p>Ce sont principalement :</p>
+<p>Les collections</p>
+<ul>
+<li>Queue<br />
+</li>
+<li>List</li>
+<li>Set</li>
+</ul>
+<p>Les maps</p>
+<ul>
+<li>Map</li>
+</ul>
+<p>Les tableaux (analogues aux List)</p>
+</div>
+<div id="les-collections" class="slide section level1">
+<h1>Les collections</h1>
+<p>Elles ne peuvent pas stocker de type primitif, d'où des types spéciaux :</p>
+<ul>
+<li>Integer -&gt; int</li>
+<li>Long -&gt; long</li>
+<li>Float -&gt; float<br />
+...</li>
+</ul>
+</div>
+<div id="les-collections-1" class="slide section level1">
+<h1>Les collections</h1>
+<p>Interface commune, elles ont notamment toutes les méthodes :</p>
+<ul>
+<li>add / addAll</li>
+<li>remove</li>
+<li>contains / retainsAll / removeAll</li>
+<li>itérations</li>
+</ul>
+<p>Attention encore une fois à ce qu'elles ne sont pas aussi efficace suivant les structures !</p>
+</div>
+<div id="queue" class="slide section level1">
+<h1>Queue</h1>
+<p>C'est une file d'attente, comme lorsque vous allez à la poste !<br />
+Le premier arrivé est le premier servi, les queues servent essentiellement à traiter des taches (comme des messages webservices).</p>
+<pre><code>Queue&lt;int&gt; queue = new LinkedList&lt;int&gt;();
+
+queue.add(1);
+queue.add(2);
+queue.add(3);
+
+queue.poll(); // =&gt; renvoit 1
+queue.poll(); // =&gt; renvoit 2</code></pre>
+<p>Elles sont très souvent ThreadSafe.<br />
+Elles existent car les ArrayList sont très peu efficace pour supprimer le premier élément (et les Set ne conservent pas l'ordre d'insertion)</p>
+</div>
+<div id="list" class="slide section level1">
+<h1>List</h1>
+<p>C'est la collection la plus standard !</p>
+<p>Elles conservent l'ordre d'insertion, tolèrent les doublons, et sont très efficaces pour ajouter des éléments et retrouver un élément à partir de leur position.</p>
+<p>Par contre elles n'ont pas de moyen de retrouver des éléments à partir de leur valeur, elles sont très inefficaces pour toutes les opérations consistant à savoir si un élément est présent :</p>
+<ul>
+<li>retainAll</li>
+<li>contains</li>
+<li>containAll</li>
+<li>removeAll</li>
+</ul>
+<p>Utilisez des ArrayList par défaut.</p>
+<p>(Les array / tableau de type int[] ont les mêmes caractéristiques, la seule différence étant que leur taille est fixe)</p>
+</div>
+<div id="les-set" class="slide section level1">
+<h1>Les Set</h1>
+<p>Au niveau de l'interface, c'est la même que la List, sauf que vous n'avez pas la méthode get.</p>
+<p>Les éléments ne sont plus organisés selon leur ordre d'insertion, mais selon leur valeur. Vous ne pouvez pas avoir de doublons.</p>
+<p>D'où les effets suivants :</p>
+<ul>
+<li>il est beaucoup plus rapide de vérifier la présence, l'absence d'un élément<br />
+</li>
+<li>il est plus long d'insérer un élément ou de supprimer le dernier</li>
+</ul>
+</div>
+<div id="les-set-2" class="slide section level1">
+<h1>Les Set (2)</h1>
+<p>L'insertion est plus lente, car le code ne peut pas juste le mettre à la fin, il doit le mettre &quot;au bon endroit&quot; pour pouvoir le retrouver facilement après.</p>
+<p>Attention à la notion de doublons ! Elle dépend de l'implémentation de la classe (méthode equals / compareTo / hashCode() )</p>
+</div>
+<div id="les-set-implémentations" class="slide section level1">
+<h1>Les Set : implémentations</h1>
+<p>Il en existe deux types principaux, HashSet et TreeSet.</p>
+<ul>
+<li>TreeSet =&gt; nécessite que l'objet soit Comparable (mais ne vous le dit pas à la compilation !!!)</li>
+<li>HashSet =&gt; pas de contrainte, souvent plus rapide</li>
+</ul>
+<p>Le code suivant provoque une erreur lorsque vous essayez d'insérer un élément (que c'est moche ...)</p>
+<pre><code>Set&lt;ItemAllType&gt; set = new TreeSet&lt;ItemAllType&gt;(); </code></pre>
+<p>Par contre, lorsque vous itérez sur un TreeSet<Integer>, ils seront dans l'ordre, alors qu'avez un HashSet<integer> non.</p>
+</div>
+<div id="les-set-implémentations-1" class="slide section level1">
+<h1>Les Set : implémentations</h1>
+<p>Par défaut utilisez un HashSet.<br />
+Si vous avez des objets Comparable et que vous voulez itérez dessus dans l'ordre, utilisez un TreeSet.</p>
+</div>
+<div id="set-vs-arraylist" class="slide section level1">
+<h1>Set VS ArrayList ??</h1>
+<p>En un mot, par défaut utilisez des ArrayList, si vous devez faire des contains / retainAll, utilisez des Set.</p>
+<p>Exemples :</p>
+<ul>
+<li>filtre sur les marques, vous ne devez garder que les items de certains marques<br />
+</li>
+<li>comptage du nombre de marque différentes</li>
+<li>comparer les marques communes ou non entre deux fichiers</li>
+</ul>
+<p>Savoir si deux sets contiennent les mêmes éléments :</p>
+<pre><code>set1.size() == set2.size() &amp;&amp; set1.containsAll( set2 );</code></pre>
+</div>
+<div id="comparaison-set-array" class="slide section level1">
+<h1>Comparaison set / array</h1>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Set</th>
+<th>ArrayList /</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Accès par index</td>
+<td>Non</td>
+<td>O(1)</td>
+</tr>
+<tr class="even">
+<td>Accès par valeur (contains)</td>
+<td>O(log(n))</td>
+<td>O(n)</td>
+</tr>
+<tr class="odd">
+<td>Ajout d'élément</td>
+<td>O(log(n))</td>
+<td>O(1)</td>
+</tr>
+<tr class="even">
+<td>Ajout au début</td>
+<td>Non</td>
+<td>O(n)</td>
+</tr>
+<tr class="odd">
+<td>Remove à la fin</td>
+<td>Non</td>
+<td>O(1)</td>
+</tr>
+<tr class="even">
+<td>Remove</td>
+<td>O(log(n))</td>
+<td>O(n)</td>
+</tr>
+<tr class="odd">
+<td>Parcours</td>
+<td>Ordre des éléments</td>
+<td>ordre d'insertion</td>
+</tr>
+<tr class="even">
+<td>View sur sous partie</td>
+<td>Non</td>
+<td>Oui</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="map" class="slide section level1">
+<h1>Map</h1>
+<p>Pour l'instant, on a vu :</p>
+<ul>
+<li>List =&gt; accéder aux éléments par leur position<br />
+</li>
+<li>Set =&gt; accéder aux éléments par leur valeur (pas vraiment un accès)</li>
+</ul>
+<p>Comment faire si je veux trouver un élément à partir de son id ??</p>
+</div>
+<div id="map-1" class="slide section level1">
+<h1>Map</h1>
+<p>Association clé / valeur</p>
+<pre><code>Map&lt;Long, ItemAllType&gt; map = new TreeMap&lt; Long, ItemAllType &gt;();
+
+map.put( item.getId(), item );
+map.get( item.getId() ); // retrouve rapidement mon Item  </code></pre>
+<p>Même principe que le Set, sauf que les éléments sont organisés par rapport à une clé.</p>
+<p>Pas de méthode add, il faut forcément ajouter une clé et une valeur.</p>
+</div>
+<div id="map-2" class="slide section level1">
+<h1>Map (2)</h1>
+<p>A quoi ça sert ?<br />
+Accès par Id, par Titre, par ce qu'on veut.<br />
+Compter les éléments.</p>
+<p>Chaque clé est unique.<br />
+En cas de put, si la clé est déjà présente, elle est écrasée.</p>
+</div>
+<div id="map-3" class="slide section level1">
+<h1>Map (3)</h1>
+<p>Les méthodes sont déclinées sur les clés et sur les valeurs.</p>
+<pre><code>containsKey( ... )  ; // =&gt; très efficace
+containsValue( ... ); // =&gt; très lent  
+
+for(Map.Entry&lt;String, Integer&gt; e: brandCounter.entrySet() )
+{
+    System.out.println( e.getKey() );
+    System.out.println( e.getValue() );
+}</code></pre>
+</div>
+</body>
+</html>
