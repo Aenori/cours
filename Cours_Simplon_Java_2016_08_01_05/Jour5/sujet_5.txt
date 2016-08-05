@@ -29,7 +29,7 @@ Implémentez dans la classe AllInfoWithAccess une méthode
 
 getAllTitle()
 
-qui renvoit une map<Integer, String> qui aux id de chaque Item  
+qui renvoit une map<Long, String> qui aux id de chaque Item  
 associe leur titre (par exemple pour le premier item, elle 
 associera à l'id 31852 le titre "Girls Ballet Tutu Zebra Hot Pink".
 
