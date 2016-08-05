@@ -1,0 +1,123 @@
+
+Exercice n°1:
+=============
+
+(Avec TestU)
+
+Dans la classe Utils, créez une fonction getMapCarre( int n ):
+
+public static Map<Integer,Integer> getMapCarre( int n )
+
+Qui prend en argument un entier n et renvoit une map constituée 
+de n éléments, et qui associe à chaque nombre compris entre 0
+et n-1 sont carré (son produit par lui-même)
+
+Par exemple :
+
+0 ->  0
+1 ->  1
+2 ->  4
+3 ->  9
+4 -> 16
+5 -> 25
+etc ...
+
+Exercice n°2:
+=============
+
+Implémentez dans la classe AllInfoWithAccess une méthode 
+
+getAllTitle()
+
+qui renvoit une map<Integer, String> qui aux id de chaque Item  
+associe leur titre (par exemple pour le premier item, elle 
+associera à l'id 31852 le titre "Girls Ballet Tutu Zebra Hot Pink".
+
+Exercice n°3:
+=============
+
+A l'aide d'un set, comptez le nombre de catégories différentes 
+dans le fichier all_info_50000.xml.
+
+Vous devez en trouver 14396
+
+Idem pour le nombre de marques (brand) différente.
+
+Vous devez trouver 4081 marques différentes
+
+Exercice n°4:
+=============
+
+Pour cet exercice et les suivants, nous utiliserons toujours 
+all_info_50000.xml.
+A l'aide d'une map en mode compteur, déterminez le nombre 
+d'item dans le fichier dont la marque est :  
+
+    Sony (réponse 227)
+    Stanley 
+
+
+Exercice n°5:
+=============
+
+Déterminez les 5 marques les plus présentes dans le fichier 
+all_info_50000.xml.  
+
+Il faut utiliser une map en mode counter, puis :
+
+    - soit trier les Entry< String, Integer > par value et prendre
+    les plus élevées
+    - soit récupérer les valeurs, les trier, extraire les 10 plus
+    importantes dans un set, et parcourir la map pour extraire les
+    clés / valeurs présentes dans ce set
+
+Exercice n°6:
+=============
+
+Nous allons commencer à implémenter le moteur de recommandation !  
+
+Pour cela nous utiliserons la classe AllInfoWithAccess qui hérite
+de AllInfo et est lue avec la méthode 
+ReadAndWriteFiles.readXmlFileAllInfoWithAccess
+
+Nous utiliserons le fichier exo_recommandation_example.xml dans
+un premier temps.  
+
+L'interface est la suivante :
+
+    - getItemList() => La liste des items contenues, juste un 
+    raccourci vers getItems().getItem()
+    - getAllBrands() => La liste de toutes les marques de chaque
+    items (les marques sont présentes plusieurs fois)
+    - getRecommandationProductId() => le produit pour lequel on
+    demande une recommandation de produit similaire
+    - getItemFromId( Long id ) => une fonction qui prend en 
+    argument un entier et renvoit l'item correspondante 
+    - getPastCommands() => une fonction qui renvoit une 
+    List< Set< Integer > >, chaque Set représentant une commande
+    d'un utilisateur précédent
+
+Implémentez une méthode getItemRecommandee(), qui à partir du
+AllInfoWithAccess renvoit l'item recommandée.  
+La première règle est que l'on renvoit l'item qui a le plus de
+commandes passées avec l'item désignée par getRecommandationProductId()  
+
+Vérifiez que la recommandation pour les items 1 est l'item 2 et 
+réciproquement, et que la recommandation pour l'item 3 est l'item 4
+
+Exercice n°7:
+=============
+
+Nous allons maintenant ajouter un critère supplémentaire, à savoir que
+si un produit a le même nombre de commande commune que le produit
+pour lequel on demande une recommandation, il a un bonus de 20% 
+(ie si il avait 10 commandes communes, il est considéré comme en ayant
+12).
+
+Vérifiez que maintenant la recommandation pur l'item 3 est l'item 5
+On veut rajouter un deuxième critère, que si les produits de même 
+marque que l'item demandée bénéficient 
+
+
+
+
