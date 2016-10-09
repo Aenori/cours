@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<hibernate-mapping>
+	<class name="com.simplon.demohibernate.simple.Reservation" table="reservations">
+		<id name="id" column="id">
+			<generator class="sequence" />
+		</id>
+		<property name="name" column="name" />
+	</class>
+</hibernate-mapping>

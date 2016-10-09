@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/hibernate-release-5.2.3.Final/lib/required/hibernate-core-5.2.3.Final.jar"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/hibernate-release-5.2.3.Final/lib/required/hibernate-commons-annotations-5.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/hibernate-release-5.2.3.Final/lib/required/jandex-2.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/hibernate-release-5.2.3.Final/lib/required/javassist-3.20.0-GA.jar"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/hibernate-release-5.2.3.Final/lib/required/classmate-1.3.0.jar"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/hibernate-release-5.2.3.Final/lib/required/jboss-logging-3.3.0.Final.jar"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/hibernate-release-5.2.3.Final/lib/required/geronimo-jta_1.1_spec-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/hibernate-release-5.2.3.Final/lib/required/cdi-api-1.1.jar"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/hibernate-release-5.2.3.Final/lib/required/javax.inject-1.jar"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/hibernate-release-5.2.3.Final/lib/required/jsr250-api-1.0.jar"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/hibernate-release-5.2.3.Final/lib/required/jboss-interceptors-api_1.1_spec-1.0.0.Beta1.jar"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/hibernate-release-5.2.3.Final/lib/required/el-api-2.2.jar"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/hibernate-release-5.2.3.Final/lib/required/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/hibernate-release-5.2.3.Final/lib/required/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/hibernate-release-5.2.3.Final/lib/required/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/home/nicolas/extern_dev/lib-java/mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
