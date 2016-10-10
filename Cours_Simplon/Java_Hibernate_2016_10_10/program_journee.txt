@@ -1,0 +1,61 @@
+% Java / simplon
+% Projet fin de formation
+% 10->14 octobre
+
+# Présentation Denís SIMÓN SONEIRA
+
+Qui assurera la formation cette semaine
+
+# Programme de la journée
+
+Le but est d'avancer sur le projet, et cela est plus efficace quand nous pouvons travailler sur votre code et vos difficultés.  
+D'où l'importance du github !  
+
+N'hésitez pas si vous avez des questions sur un point spécifique.  
+
+Après pour cette première session, c'est normal si vous n'avez pas encore eu le temps d'avancer.  
+Mais il ne s'agit pas non plus que nous vous dictions le projet.  
+
+# Programme de la journée (2)
+
+Hibernate en plus pratique !
+
+Installation gihub / mysql  
+Attaque de hibernate en TDD  
+
+# Programme de la journée (3)
+
+ 9h30 -  9h45 : Courte introduction  
+ 9h45 - 10h05 : Analyse des usecases  
+10h05 - 10h25 : Modèle de donnée (si ce n'est déjà fait)  
+10h25 - 12h30 : Hibernate TDD  
+13h30 - 14h30 : Dojo ?  
+14h30 - 17h30 : Hibernate TDD 
+
+# Hibernate  
+
+Manipulation des tests unitaires  
+Manipulation de base de donnée "in memory"  
+Relations OneToMany / ManyToMany  
+Question de l'héritage  
+
+# Objectif  
+
+Etre capable de passer le test unitaire "JavaSimplonFullUnitTest.java"  
+Celui-ci s'appuie essentiellement sur la classe "UnittestReservation"  
+
+# Question sur hibernate :  
+
+Est-il obligatoire de définir des fichiers de mappage (hbm.xml) ?  
+Est-il obligatoire d'utiliser des annotations ?  
+
+# Exemples et ressources sur github.com/Aenori
+
+# Point important sur Hibernate
+
+Manipuler les relations, car c'est une des fonctionnalités intéressantes du framework  
+
+Plus avancé :  
+Faire attention aux objets en 'cache' ou non  
+
+
