@@ -135,7 +135,6 @@ public class JavaSimplonFullUnitTest extends TestUnitInMemorySession {
 		}
 	}
 		
-
 	public void test_07_GetListeDeReservationPourUtilisateur()
 	{
 		Long userid1 =  UnittestReservation.CreerUtilisateur("Dupont");
@@ -149,10 +148,8 @@ public class JavaSimplonFullUnitTest extends TestUnitInMemorySession {
 		{
 			Long userid  = (i % 2) == 0 ? userid1 : userid2;
 			
-			LocalDateTime futureDateD = LocalDateTime.of(
-					2030,10,10+i,9,0); 
-			LocalDateTime futureDateF = LocalDateTime.of(
-					2030,10,10+i,10,0);  	
+			LocalDateTime futureDateD = LocalDateTime.of(2030,10,10+i, 9,0); 
+			LocalDateTime futureDateF = LocalDateTime.of(2030,10,10+i,10,0);  	
 			
 			Long newResa = UnittestReservation.CreerReservation(
 					salleid,
@@ -176,23 +173,98 @@ public class JavaSimplonFullUnitTest extends TestUnitInMemorySession {
 			}
 		}
 	}
-		// Fonction 7
-		// Renvoit la liste des ids des réservations pour un utilisateur donné
-		// public static List<Long> GetListeDeReservationPourUtilisateur(Long user_id)
 		
-		// Fonction 8
-		// Renvoit la liste des ids des réservations pour un utilisateur donné,
-		// qui recouvre la plage indiqué par début et fin.
-		// Par exemple si la plage est du 10/10 à 10h au 10/10 à 12h, l'id d'une
-		// réservation qui irait du 10/10 à 11h30 au 10/10 à 13h serait renvoyé
-		// mais pas celui d'une réservation allant du 10/10 12h au 10/10 14h
-		// public static List<Long> GetListeDeReservationPourUtilisateur(Long user_id, LocalDateTime debut, LocalDateTime fin)
+	public void test_08_GetListeDeReservationPourUtilisateurAvecDate()
+	{
+		Long userid1 =  UnittestReservation.CreerUtilisateur("Dupont");
+		Long userid2 =  UnittestReservation.CreerUtilisateur("Dupond");
 		
+		Long salleid1 =  UnittestReservation.CreerSalle("Salle 1");
+		Long salleid2 =  UnittestReservation.CreerSalle("Salle 2");
 		
-		// Fonction 9
-		// Même chose, mais pour une ressource donnée
-		// public static List<Long> GetListeDeReservationPourRessource(Long ressource_id)
+		List<Long> userid1_resas = new ArrayList<Long>();
+		List<Long> userid2_resas = new ArrayList<Long>();
+		List<Long> all_resas = new ArrayList<Long>();
 		
+		for(int i = 0; i < 8; ++i)
+		{	
+			LocalDateTime futureDateD = LocalDateTime.of(2030,10,10, 9+i,0); 
+			LocalDateTime futureDateF = LocalDateTime.of(2030,10,10,10+i,0);  	
+			
+			Long newResa1 = UnittestReservation.CreerReservation(
+					salleid1, userid1, futureDateD, futureDateF );
+			Long newResa2 = UnittestReservation.CreerReservation(
+					salleid2, userid2, futureDateD, futureDateF );
+			
+			assertNotNull( newResa1 );
+			assertNotNull( newResa2 );
+			
+			userid1_resas.add( newResa1 );
+			userid2_resas.add( newResa2 );
+			all_resas.add( newResa1 );
+			all_resas.add( newResa2 );
+		}
+		
+		for(int i = 0; i < 17; ++i)
+		{
+			for(int j = i + 1; j < 17; ++j)
+			{
+				LocalDateTime futureDateD = LocalDateTime.of(2030,10,10,i / 2,30*(i%2)); 
+				LocalDateTime futureDateF = LocalDateTime.of(2030,10,10,j / 2,30*(j%2));
+				
+				int nb_resas = (j+1)/2 - (i/2);
+				
+				List<Long> liste_resas = UnittestReservation.GetListeDeReservationPourUtilisateur( 
+						userid1, futureDateD, futureDateF );
+				
+				assertEquals( liste_resas.size(), nb_resas );
+				for(int k = i/2; k < (j+1)/2; ++k)
+				{
+					assertEquals( userid1_resas.get(k), liste_resas.get(k - (i/2)) );
+				}
+			}
+		}
+	}
+		
+	public void test_09_GetListeDeReservationPourRessource()
+	{
+		Long userid =  UnittestReservation.CreerUtilisateur("Dupont");
+		
+		Long salleid1 =  UnittestReservation.CreerSalle("Salle 1");
+		Long salleid2 =  UnittestReservation.CreerSalle("Salle 2");
+		
+		List<Long> salle1_resas = new ArrayList<Long>();
+		Set<Long> all_resas = new HashSet<Long>();
+		
+		for(int i = 0; i < 10; ++i)
+		{
+			Long salleid  = (i % 2) == 0 ? salleid1 : salleid2;
+			
+			LocalDateTime futureDateD = LocalDateTime.of(2030,10,10+i, 9,0); 
+			LocalDateTime futureDateF = LocalDateTime.of(2030,10,10+i,10,0);  	
+			
+			Long newResa = UnittestReservation.CreerReservation(
+					salleid,
+					userid,
+					futureDateD, futureDateF );
+			assertNotNull( newResa );
+			assertFalse( all_resas.contains( newResa ) );
+			
+			if( (i % 2) == 0 )
+			{
+				salle1_resas.add( newResa );
+			}
+			all_resas.add(newResa);
+			
+			List<Long> liste_resa_to_test = UnittestReservation.GetListeDeReservationPourRessource(salleid1);
+		
+			assertEquals( salle1_resas.size(), liste_resa_to_test.size() );
+			for(int j = 0; j < salle1_resas.size(); ++j)
+			{
+				assertEquals( salle1_resas.get(j), liste_resa_to_test.get(j));
+			}
+		}
+	}	
 		// Fonction 10
 		// Même chose, mais pour une ressource donnée
 		// public static List<Long> GetListeDeReservationPourRessource(Long ressource_id, LocalDateTime debut, LocalDateTime fin)
